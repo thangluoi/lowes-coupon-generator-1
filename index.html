@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lowe's Coupon Generator</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="static/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="coupon-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Lowe's Coupon Generator</h1>
+      <p class="lead">Coupons are not guaranteed to work, but try and see if you can save some money!</p>
+    </div>
+
+    <div class="container">
+      <div class="coupons-list card-deck mb-3 text-center"></div>
+    </div>
+
+    <template id="coupon-template">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="coupon-name my-0 font-weight-normal"></h4>
+        </div>
+        <div class="card-body">
+          <button type="button" class="btn btn-lg btn-block btn-primary get-coupon">Get Coupon (<small class="master-code"></small>)</button>
+        </div>
+      </div>
+    </template>
+
+    <div class="modal fade" id="coupon-modal" tabindex="-1" role="dialog" aria-labelledby="coupon-modal-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+            <div class="container container-coupon">
+              <div class="row">
+                <div class="col my-4 text-center">
+                  <div class="row mb-4">
+                    <div class="col mx-auto">
+                      <img class="w-100 px-5 mb-2 mx-auto" src="static/img/lowes-logo.svg">
+                      <div class="pb-2 px-5 mx-auto rounded shadow bg-primary text-white">
+                        <h1 class="promo-title text-nowrap m-0 w-100"></h1>
+                        <h6 class="text-nowrap w-100"><small class="promo-subtitle"></small></h6>
+                        <h6 class="text-nowrap m-0 p-1 w-auto bg-light text-dark rounded">Valid through <span class="promo-expiry"></span></h6>
+                      </div>
+                    </div>
+                    <div class="col mt-3 mt-lg-5 mx-auto">
+                      <div><img class="barcode-image" src=""></div>
+                      <input class="form-control-lg coupon-code" type="text" value="" readonly>
+                    </div>
+                  </div>
+
+                  <div class="text-left mx-4">
+                    Your coupon is uniquely coded, so it can be used only once
+                    at any Lowe's&reg; store. If you have already used this coupon
+                    on a purchase, additional copies of this coupon will not
+                    work at checkout and additional uses of this coupon will
+                    not receive a discount.
+                  </div>
+                </div>
+
+                <div class="col my-4 coupon-extra">
+                  <span class="coupon-instructions">
+                    <h6>Employee Instructions:</h6>
+                    <p>
+                      <ol>
+                        <li>Ensure transaction total meets the threshold requirements on this coupon.</li>
+                        <li>Scan the barcode or key enter the 15-digit numerical code located on the coupon after all items have been scanned, then press total.</li>
+                        <li>Cut and discard the coupon after scanning - do not give back to customer.</li>
+                      </ol>
+                    </p>
+
+                    <h6>Lowes.com Instructions:</h6>
+                    <p>At checkout enter the complete 15-digit numerical code that appears below the barcode on this coupon. This code is valid for a single receipt purchase.</p>
+                  </span>
+
+                  <span class="coupon-terms">
+                    <strong>This one-time use promotion coupon ("Coupon") cannot be used in conjunction
+                    with any other coupon or discount,</strong> has no implied warranties, and is valid
+                    for 10% off a single receipt purchase of any in-stock or Special Order
+                    merchandise only up to $5,000 (maximum discount $500).
+
+                    Coupon is not redeemable for cash, is nontransferable and cannot be replaced
+                    if lost or stolen. Void if altered, defaced, copied, transferred, or sold
+                    through any on-line auction or otherwise.
+
+                    Limit one Coupon per household. Redeemable in-store. on Lowes.com, and on
+                    Lowe's mobile applications.
+
+                    Not valid on previous sales, multiple transactions, purchase of services,
+                    installation, extended protection plans, gift cards or Weber products,
+                    Dacor&reg;, ICON&reg; or Fisher & Paykel&reg; brand appliances, or clearance
+                    appliances.
+
+                    This Coupon is valid in the U.S. only and will expire on the date listed.
+
+                    Lowe's reserves the right to withdraw the Coupon at any time for any reason.
+
+                    <strong>Directions for Lowes.com and mobile applications:</strong>
+                    Enter the number located under the barcode in the "Promotional Code" box
+                    during checkout and click "Apply Code" &copy;2018 Lowe's.
+
+                    LOWE'S, Gable Mansard Design and Never Stop Improving are registered trademarks of LF, LLC.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary copy-coupon">Copy</button>
+            <button type="button" class="btn btn-info print-coupon">Print</button>
+            <button type="button" class="btn btn-success new-coupon">Generate</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="static/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+
+    <script src="static/js/coupons.js"></script>
+    <script src="static/js/generator.js"></script>
+  </body>
+</html>

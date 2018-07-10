@@ -1,0 +1,89 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media screen {
+  .coupon-extra {
+    display: none;
+  }
+}
+
+@media print {
+  #coupon-modal {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  #coupon-modal .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  #coupon-modal .modal-footer,
+  #coupon-modal .close {
+    display: none;
+  }
+
+  #coupon-modal .modal-content {
+    border: 0;
+  }
+
+  .container-coupon {
+    border: 3px dashed gray;
+  }
+}
+
+body {
+  background-color: #efefef;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.coupon-header {
+  max-width: 700px;
+}
+
+.card-deck .card {
+  min-width: 220px;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.coupon-thumb {
+  margin-bottom: 1rem;
+}
+
+.coupon-code {
+  border: none;
+  text-align: center;
+}
+
+/* Coupon styles */
+
+.container-coupon {
+  font-size: 12px;
+  line-height: 1rem;
+}
+
+.coupon-terms {
+  font-size: 80%;
+  line-height: 0.5rem;
+}
