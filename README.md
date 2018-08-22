@@ -6,6 +6,9 @@ A simple server to scrape and generate Lowe's printable coupons.
 $ pip3 install flask requests bs4
 ```
 
+## Demo
+See the coupon generator in action [here][generator].
+
 ## Usage
 1.  Clone this repository:
     ```shell
@@ -33,4 +36,5 @@ August 22, 2018, it is working. To run the scraper, visit
 To update the master codes manually, edit the `static/js/coupons.js` file.
 Master codes can usually be found on [this Slickdeals page][mastercodes].
 
+[generator]: https://dale3h.github.io/lowes-coupon-generator/
 [mastercodes]: https://slickdeals.net/f/9549456-lowe-s-10-15-50-off-online-coupons-sharing-only-no-off-topic#post93883968
