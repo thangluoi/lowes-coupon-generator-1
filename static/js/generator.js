@@ -66,6 +66,7 @@
       var $coupon = $(template);
 
       $coupon.find('.coupon-name').html(coupon.name);
+      $coupon.find('.coupon-expiry').html(getExpiryDate(coupon.data.expiry));
 
       for (var tag in coupon.data) {
         $coupon.find('.get-coupon').data(tag, coupon.data[tag]);
