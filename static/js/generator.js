@@ -24,9 +24,27 @@
 
     var couponCode = addCheckDigit(zeroPad(prefix) + zeroPad(uniq) + zeroPad(master, 4));
 
-    $('.promo-title').html(title);
-    $('.promo-subtitle').html(subtitle);
-    $('.promo-expiry').html(expiry);
+    if (typeof title !== 'undefined') {
+      var couponLimits = "";
+
+      if (title.includes('%')) {
+        couponLimits = 'Coupon is valid for ' + title + ' a single receipt ' +
+                       'purchase of any in-stock or Special Order merchandise ' +
+                       'only ' + subtitle.replace('purchases ', '') + '.';
+      } else if (title.includes('$')) {
+        minPurchase = subtitle.replace(/^.*(\$[0-9,\.]+).*$/, '$1');
+        couponLimits = 'Coupon is valid for ' + title + ' any in-stock or ' +
+                       'special order merchandise single receipt purchase of ' +
+                       minPurchase + ' or more (calculated before taxes &amp; ' +
+                       'after applicable discounts).';
+      }
+
+      $('.promo-title').html(title);
+      $('.promo-subtitle').html(subtitle);
+      $('.promo-expiry').html(expiry);
+      $('.coupon-limits').html(couponLimits);
+    }
+
     $('.barcode-image').attr('src', 'https://api-bwipjs.metafloor.com/?bcid=code128&text=' + couponCode);
     $('.coupon-code').val(couponCode);
     $('#coupon-modal').modal({ show: true });
