@@ -1,5 +1,5 @@
 # Lowe's Coupon Generator
-A simple server to scrape and generate Lowe's printable coupons.
+Generate printable Lowe's coupons to save 10% or more.
 
 ## Requirements
 ```shell
