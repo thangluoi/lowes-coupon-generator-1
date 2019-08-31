@@ -15,7 +15,7 @@
     return couponCode + checkDigit.toString().slice(-1);
   }
 
-  function openBarcode(master, title, subtitle, expiry, uniq, prefix = 47000) {
+  function openBarcode(master, title, subtitle, expiry, uniq, prefix = 47101) {
     currentCode = master;
 
     if (typeof uniq === 'undefined') {
