@@ -2,7 +2,7 @@ var couponData = [
   {
     "name": "10% off",
     "data": {
-      "mastercode": "1061",
+      "mastercode": "3127",
       "title": "10% off",
       "subtitle": "purchases up to $5,000",
       "expiry": "August"
